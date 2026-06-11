@@ -115,14 +115,16 @@ const Sync = {
         device_id: this.deviceId
       });
 
+      // Google Apps Script redirects POST to a different URL.
+      // Using no-cors avoids CORS preflight; text/plain ensures body is sent.
+      // Response is opaque (can't read), so we assume success if no network error.
       const response = await fetch(this.serverUrl, {
         method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: payload,
+        mode: 'no-cors',
         redirect: 'follow'
       });
-
-      let result = {};
-      try { result = await response.json(); } catch(e) {}
 
       // Mark rows as synced
       const ids = unsynced.map(r => r.id);
