@@ -1,10 +1,46 @@
 const Admin = {
+  PASSWORD: '123',
+  authenticated: false,
+
   async init() {
     this.render();
   },
 
   async render() {
     const el = document.getElementById('admin-area');
+
+    // Password check
+    if (!this.authenticated) {
+      el.innerHTML = `
+        <div class="card centered" style="max-width:360px;margin:60px auto">
+          <div style="font-size:2.5em;margin-bottom:12px">🔒</div>
+          <h3 style="margin-bottom:16px">Админ нэвтрэх</h3>
+          <p style="color:var(--muted);font-size:0.9em;margin-bottom:16px">Нууц үгээ оруулна уу</p>
+          <input type="password" id="admin-pw" placeholder="Нууц үг" style="text-align:center;font-size:1.1em">
+          <div id="admin-pw-error" style="color:var(--danger);font-size:0.85em;min-height:20px;margin-bottom:8px"></div>
+          <button class="btn btn-primary" id="admin-login-btn" style="width:100%">Нэвтрэх</button>
+        </div>
+      `;
+      const pwInput = document.getElementById('admin-pw');
+      const loginBtn = document.getElementById('admin-login-btn');
+      const errorEl = document.getElementById('admin-pw-error');
+
+      const tryLogin = () => {
+        if (pwInput.value === this.PASSWORD) {
+          this.authenticated = true;
+          this.render();
+        } else {
+          errorEl.textContent = 'Нууц үг буруу байна';
+          pwInput.value = '';
+          pwInput.focus();
+        }
+      };
+
+      loginBtn.addEventListener('click', tryLogin);
+      pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+      setTimeout(() => pwInput.focus(), 100);
+      return;
+    }
     const rows = await getAllRows();
     const unsyncedCount = await Sync.getUnsyncedCount();
     const syncedIds = Sync.getSyncedIds();

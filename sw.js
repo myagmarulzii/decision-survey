@@ -1,4 +1,4 @@
-const CACHE_NAME = 'survey-v6';
+const CACHE_NAME = 'survey-v7';
 const ASSETS = [
   './',
   './index.html',
