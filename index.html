@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2c3e50">
+  <title>Decision Survey</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <span class="navbar-title">Decision Survey</span>
+    <div class="navbar-tabs">
+      <button class="tab-btn active" data-tab="survey">Questionnaire</button>
+      <button class="tab-btn" data-tab="satisfaction">Satisfaction</button>
+      <button class="tab-btn" data-tab="admin">Admin</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div id="tab-survey" class="tab-content active">
+      <div class="survey-box" id="survey-area"></div>
+    </div>
+    <div id="tab-satisfaction" class="tab-content">
+      <div class="survey-box" id="satisfaction-area"></div>
+    </div>
+    <div id="tab-admin" class="tab-content">
+      <div class="survey-box" id="admin-area"></div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/survey.js"></script>
+  <script src="js/satisfaction.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
