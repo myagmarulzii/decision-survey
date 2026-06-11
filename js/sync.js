@@ -110,19 +110,19 @@ const Sync = {
     this.updateSyncButton('syncing');
 
     try {
-      const response = await fetch(this.serverUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          rows: unsynced,
-          device_id: this.deviceId
-        }),
-        mode: 'no-cors'
+      const payload = JSON.stringify({
+        rows: unsynced,
+        device_id: this.deviceId
       });
 
-      // Google Apps Script redirects, so we may get opaque response
-      // with no-cors mode. We'll assume success if no network error.
-      // For proper status, we could use cors mode but GAS doesn't support it well.
+      const response = await fetch(this.serverUrl, {
+        method: 'POST',
+        body: payload,
+        redirect: 'follow'
+      });
+
+      let result = {};
+      try { result = await response.json(); } catch(e) {}
 
       // Mark rows as synced
       const ids = unsynced.map(r => r.id);
