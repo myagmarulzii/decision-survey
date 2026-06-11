@@ -13,13 +13,24 @@
 </head>
 <body>
   <nav class="navbar">
-    <span class="navbar-title">Шийдвэрийн судалгаа</span>
+    <div class="navbar-top">
+      <span class="navbar-title">Шийдвэрийн судалгаа</span>
+      <div class="status-indicator">
+        <div id="online-dot" class="status-dot offline"></div>
+        <span id="online-label">Офлайн</span>
+      </div>
+    </div>
     <div class="navbar-tabs">
       <button class="tab-btn active" data-tab="survey">Асуулга</button>
       <button class="tab-btn" data-tab="satisfaction">Сэтгэл ханамж</button>
       <button class="tab-btn" data-tab="admin">Админ</button>
     </div>
   </nav>
+
+  <div id="sync-banner" class="sync-banner hidden">
+    <span id="sync-banner-text"></span>
+    <button id="sync-banner-btn" class="btn btn-primary btn-sm">Илгээх</button>
+  </div>
 
   <main class="container">
     <div id="tab-survey" class="tab-content active">
@@ -37,6 +48,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/db.js"></script>
+  <script src="js/sync.js"></script>
   <script src="js/survey.js"></script>
   <script src="js/satisfaction.js"></script>
   <script src="js/admin.js"></script>

@@ -1,10 +1,11 @@
-const CACHE_NAME = 'survey-v3';
+const CACHE_NAME = 'survey-v4';
 const ASSETS = [
   './',
   './index.html',
   './css/style.css',
   './js/data.js',
   './js/db.js',
+  './js/sync.js',
   './js/survey.js',
   './js/satisfaction.js',
   './js/admin.js',
