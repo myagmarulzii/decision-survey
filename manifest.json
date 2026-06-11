@@ -1,7 +1,7 @@
 {
-  "name": "Decision Survey",
-  "short_name": "Survey",
-  "description": "Offline decision survey app",
+  "name": "Шийдвэрийн судалгаа",
+  "short_name": "Судалгаа",
+  "description": "Офлайн шийдвэрийн судалгааны апп",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f2f2f7",

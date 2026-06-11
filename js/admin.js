@@ -38,13 +38,13 @@ const Admin = {
           <button class="btn btn-secondary" id="admin-refresh">${TXT.admin_refresh}</button>
           <div style="display:flex;gap:8px">
             <button class="btn btn-primary" id="admin-download">${TXT.admin_download}</button>
-            <button class="btn btn-danger" id="admin-clear">Clear all data</button>
+            <button class="btn btn-danger" id="admin-clear">Бүх өгөгдөл устгах</button>
           </div>
         </div>
         <div class="summary-grid">
-          <div class="summary-item"><div class="label">Rows</div><div class="value">${rows.length}</div></div>
-          <div class="summary-item"><div class="label">Participants</div><div class="value">${pids.size}</div></div>
-          <div class="summary-item"><div class="label">Questionnaires</div><div class="value">${[...quests].sort().join(', ')}</div></div>
+          <div class="summary-item"><div class="label">Мөрийн тоо</div><div class="value">${rows.length}</div></div>
+          <div class="summary-item"><div class="label">Оролцогчид</div><div class="value">${pids.size}</div></div>
+          <div class="summary-item"><div class="label">Асуулгууд</div><div class="value">${[...quests].sort().join(', ')}</div></div>
         </div>
       </div>
       <div class="card">
@@ -71,13 +71,13 @@ const Admin = {
     a.download = 'responses-' + new Date().toISOString().slice(0,10) + '.csv';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('CSV downloaded', true);
+    showToast('CSV татагдлаа', true);
   },
 
   async clear() {
-    if (!confirm('Are you sure you want to delete ALL saved responses? This cannot be undone.')) return;
+    if (!confirm('Бүх хадгалсан хариултыг устгахдаа итгэлтэй байна уу? Энэ үйлдлийг буцаах боломжгүй.')) return;
     await clearAllData();
     this.render();
-    showToast('All data cleared', true);
+    showToast('Бүх өгөгдөл устгагдлаа', true);
   }
 };

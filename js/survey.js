@@ -170,17 +170,17 @@ const Survey = {
     const total = DECISION_GROUPS.length;
 
     const scaleLabels = [
-      '0 = Never - I don\'t associate with this at all',
-      '1 = Occasionally',
-      '2 = Sometimes',
-      '3 = Quite commonly',
-      '4 = This is me most of the time'
+      '0 = Хэзээ ч үгүй - энэ надад огт хамаарахгүй',
+      '1 = Хааяа',
+      '2 = Заримдаа',
+      '3 = Нэлээд түгээмэл',
+      '4 = Яг намайг илэрхийлнэ'
     ];
 
     const isLast = this.decisionIndex === total - 1;
     const introHtml = this.decisionIndex === 0 ? `
-      <p>In this section we ask you to describe how you make decisions. Please read carefully before answering. You can be one or more at a time, but not all 4 at the same time.</p>
-      <p>Examples of herding decisions include decisions that come up seasonally or annually (moving, buying animals, selling animals, committing to coop cashmere quota, etc.), not everyday decisions.</p>
+      <p>Энэ хэсэгт бид таныг шийдвэрээ хэрхэн гаргадаг талаар тодорхойлохыг хүсэж байна. Хариулахаасаа өмнө анхааралтай уншина уу. Та нэгээс дээш хэв маягтай байж болно, Бүх 4 хэв маягт (өнгөөр ялгарсан) дөрвүүлэнд нь өндөр буюу 4 гэсэн оноо байж болохгүй.</p>
+      <p>Мал аж ахуйтай холбоотой шийдвэрийн жишээнд улирал бүр эсвэл жил бүр гардаг шийдвэрүүд орно (нүүдэл хийх, мал худалдаж авах, мал зарах, хоршооны ноолуурын квотод амлалт өгөх гэх мэт), өдөр тутмын жижиг шийдвэрүүд биш.</p>
     ` : '';
 
     let itemsHtml = items.map(item => {
@@ -193,9 +193,9 @@ const Survey = {
 
     el.innerHTML = `
       <div class="card">
-        <div class="section-label">Section ${this.decisionIndex + 1} of ${total}</div>
+        <div class="section-label">Хэсэг ${this.decisionIndex + 1} -с ${total}</div>
         ${introHtml}
-        <div class="scale-legend"><strong>Scale:</strong><br>${scaleLabels.join('<br>')}</div>
+        <div class="scale-legend"><strong>Хэмжүүр:</strong><br>${scaleLabels.join('<br>')}</div>
         <div class="decision-group ${colorClass}">${itemsHtml}</div>
         <div class="btn-row">
           <div>${this.decisionIndex > 0 ? `<button class="btn btn-secondary" id="dec-back">${TXT.back_button}</button>` : ''}</div>
@@ -239,7 +239,7 @@ const Survey = {
     // Final validation: all 12 must be answered
     const missing = DECISION_STYLE.filter(d => this.decisionAnswers[d.id] == null);
     if (missing.length > 0) {
-      showToast('Please answer all decision-style questions. Missing: ' + missing.map(m => m.id).join(', '));
+      showToast('Дуусгахаасаа өмнө шийдвэр гаргах хэв маягийн бүх асуултад хариулна уу. Дутуу: ' + missing.map(m => m.id).join(', '));
       return;
     }
 
@@ -306,8 +306,8 @@ const Survey = {
         <h3>${TXT.thank_you_title}</h3>
         <p>${TXT.thank_you_text}</p>
         <p><strong>${TXT.time_taken_label}: ${totalSec}</strong></p>
-        <p>Participant ID: ${this.participantId}</p>
-        <p style="color:var(--muted);font-size:0.9em;">You may now use the Satisfaction tab for eligible completed participants.</p>
+        <p>Оролцогчийн код: ${this.participantId}</p>
+        <p style="color:var(--muted);font-size:0.9em;">Шаардлага хангасан оролцогчид одоо Сэтгэл ханамж табыг ашиглаж болно.</p>
         <div style="margin-top:16px">
           <button class="btn btn-secondary" id="restart-btn">${TXT.restart_button}</button>
         </div>

@@ -130,7 +130,7 @@ const Satisfaction = {
       if (checked && needsSpecify(this.group, checked.value)) {
         specArea.innerHTML = `
           <label>${TXT.specify_label}</label>
-          <textarea id="sat-specify-input" rows="3" placeholder="Type your answer here...">${this.specify || ''}</textarea>
+          <textarea id="sat-specify-input" rows="3" placeholder="Хариултаа энд бичнэ үү...">${this.specify || ''}</textarea>
         `;
       } else {
         specArea.innerHTML = '';
@@ -213,7 +213,7 @@ const Satisfaction = {
         <h3>${TXT.thank_you_title}</h3>
         <p>${TXT.satisfaction_done}</p>
         <p><strong>${TXT.time_taken_label}: ${totalSec}</strong></p>
-        <p>Participant ID: ${this.participantId}</p>
+        <p>Оролцогчийн код: ${this.participantId}</p>
         <div style="margin-top:16px">
           <button class="btn btn-secondary" id="sat-restart">${TXT.restart_button}</button>
         </div>
