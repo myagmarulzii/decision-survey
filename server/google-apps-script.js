@@ -72,9 +72,20 @@ function doPost(e) {
       'dependent_score', 'intuitive_score'
     ];
 
+    // Duplicate шалгах: device_id + participant_id + timestamp
+    const existingData = sheet.getDataRange().getValues();
+    const existingKeys = new Set();
+    for (let i = 1; i < existingData.length; i++) {
+      const key = existingData[i][21] + '|' + existingData[i][0] + '|' + existingData[i][6]; // device_id|participant_id|timestamp
+      existingKeys.add(key);
+    }
+
     let addedCount = 0;
 
     for (const row of rows) {
+      const key = deviceId + '|' + (row.participant_id || '') + '|' + (row.timestamp || '');
+      if (existingKeys.has(key)) continue; // skip duplicate
+
       const values = headers.map(h => row[h] || '');
       values.push(deviceId);
       values.push(syncedAt);

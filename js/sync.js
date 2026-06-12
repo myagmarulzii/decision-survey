@@ -3,6 +3,7 @@
  * Device бүр өөрийн ID-тэй, илгээгдсэн/илгээгдээгүй мөрүүдийг track хийнэ
  */
 const Sync = {
+  DEFAULT_SERVER: 'https://script.google.com/macros/s/AKfycbzU4X2tDPn2ah1vDRZPI1ZasZ-DXcDLWrN9PR77UI1QZtxcI6xru-AffU4SNtH1PQ6r/exec',
   serverUrl: null,
   deviceId: null,
   syncing: false,
@@ -15,8 +16,11 @@ const Sync = {
       localStorage.setItem('device_id', this.deviceId);
     }
 
-    // Server URL
-    this.serverUrl = localStorage.getItem('server_url') || '';
+    // Server URL - default URL автоматаар тохирно
+    this.serverUrl = localStorage.getItem('server_url') || this.DEFAULT_SERVER;
+    if (!localStorage.getItem('server_url')) {
+      localStorage.setItem('server_url', this.DEFAULT_SERVER);
+    }
 
     // Online/offline listener
     window.addEventListener('online', () => {
