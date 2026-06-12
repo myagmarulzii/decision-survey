@@ -29,10 +29,10 @@ const Sync = {
     });
     window.addEventListener('offline', () => this.updateStatusUI());
 
-    // Auto-sync interval (2 min)
+    // Auto-sync interval (30 sec)
     setInterval(() => {
       if (navigator.onLine && this.serverUrl) this.autoSync();
-    }, 120000);
+    }, 30000);
 
     this.updateStatusUI();
   },
@@ -88,6 +88,7 @@ const Sync = {
     if (!this.serverUrl || !navigator.onLine || this.syncing) return;
     const unsynced = await this.getUnsyncedRows();
     if (unsynced.length === 0) return;
+    console.log('[Sync] Автомат илгээж байна:', unsynced.length, 'мөр');
     await this.syncNow();
   },
 

@@ -32,7 +32,7 @@ function getOrCreateSpreadsheet() {
   sheet.setName(SHEET_NAME);
 
   const headers = [
-    'participant_id', 'questionnaire', 'question_order', 'question_id',
+    'Оролцогчийн код', 'questionnaire', 'question_order', 'question_id',
     'question_text', 'answer', 'timestamp', 'survey_start', 'survey_end',
     'total_time_seconds', 'completed', 'risk_score', 'patience_score',
     'satisfaction_score', 'satisfaction_group', 'satisfaction_reason',

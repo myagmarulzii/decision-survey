@@ -297,6 +297,10 @@ const Survey = {
     await saveRows(rows);
     this.finished = true;
     this.renderThankYou(totalSec);
+    // Дата хадгалсны дараа автоматаар серверт илгээх
+    if (navigator.onLine && Sync.serverUrl) {
+      Sync.autoSync();
+    }
   },
 
   renderThankYou(totalSec) {

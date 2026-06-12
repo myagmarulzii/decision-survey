@@ -20,7 +20,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 // Initialize sync module
 Sync.init();
 
-// Sync banner logic
+// Sync banner logic - автомат илгээх
 const syncBanner = document.getElementById('sync-banner');
 const syncBannerText = document.getElementById('sync-banner-text');
 const syncBannerBtn = document.getElementById('sync-banner-btn');
@@ -31,9 +31,28 @@ async function updateSyncBanner() {
     return;
   }
   const count = await Sync.getUnsyncedCount();
-  if (count > 0 && navigator.onLine) {
-    syncBannerText.textContent = `${count} илгээгдээгүй мөр байна`;
-    syncBanner.classList.remove('hidden');
+  if (count > 0) {
+    if (navigator.onLine) {
+      // Онлайн бол автоматаар илгээх
+      syncBannerText.textContent = `${count} мөр илгээж байна...`;
+      syncBannerBtn.style.display = 'none';
+      syncBanner.classList.remove('hidden');
+      await Sync.autoSync();
+      // Илгээсний дараа шинэчлэх
+      const remaining = await Sync.getUnsyncedCount();
+      if (remaining === 0) {
+        syncBannerText.textContent = 'Бүх дата илгээгдсэн ✓';
+        setTimeout(() => syncBanner.classList.add('hidden'), 2000);
+      } else {
+        syncBannerText.textContent = `${remaining} мөр илгээгдээгүй`;
+        syncBannerBtn.textContent = 'Дахин илгээх';
+        syncBannerBtn.style.display = '';
+      }
+    } else {
+      syncBannerText.textContent = `${count} мөр хадгалагдсан. Онлайн болмогц автомат илгээнэ.`;
+      syncBannerBtn.style.display = 'none';
+      syncBanner.classList.remove('hidden');
+    }
   } else {
     syncBanner.classList.add('hidden');
   }
@@ -44,15 +63,24 @@ if (syncBannerBtn) {
     syncBannerBtn.textContent = 'Илгээж байна...';
     syncBannerBtn.disabled = true;
     await Sync.syncNow();
-    syncBannerBtn.textContent = 'Илгээх';
+    syncBannerBtn.textContent = 'Дахин илгээх';
     syncBannerBtn.disabled = false;
     updateSyncBanner();
   });
 }
 
+// Онлайн болмогц автомат sync
+window.addEventListener('online', () => {
+  showToast('Интернэт холбогдлоо. Дата илгээж байна...', true);
+  setTimeout(updateSyncBanner, 1000);
+});
+
+window.addEventListener('offline', () => {
+  updateSyncBanner();
+});
+
 // Check sync banner periodically
 setInterval(updateSyncBanner, 30000);
-window.addEventListener('online', () => setTimeout(updateSyncBanner, 1000));
 
 Survey.init();
 updateSyncBanner();

@@ -1,15 +1,15 @@
-const CACHE_NAME = 'survey-v9';
+const CACHE_NAME = 'survey-v10';
 const ASSETS = [
   './',
   './index.html',
-  './css/style.css?v=8',
-  './js/data.js?v=8',
-  './js/db.js?v=8',
-  './js/sync.js?v=8',
-  './js/survey.js?v=8',
-  './js/satisfaction.js?v=8',
-  './js/admin.js?v=8',
-  './js/app.js?v=8',
+  './css/style.css?v=10',
+  './js/data.js?v=10',
+  './js/db.js?v=10',
+  './js/sync.js?v=10',
+  './js/survey.js?v=10',
+  './js/satisfaction.js?v=10',
+  './js/admin.js?v=10',
+  './js/app.js?v=10',
   './manifest.json'
 ];
 

@@ -204,6 +204,10 @@ const Satisfaction = {
     await saveRows(rows);
     this.finished = true;
     this.renderDone(totalSec);
+    // Дата хадгалсны дараа автоматаар серверт илгээх
+    if (navigator.onLine && Sync.serverUrl) {
+      Sync.autoSync();
+    }
   },
 
   renderDone(totalSec) {
